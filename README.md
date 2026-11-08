@@ -4,6 +4,27 @@ English | [简体中文](README.zh-CN.md)
 
 PMOP is an experimental operating agreement for a multi-task project: one coordinating session, two JSON files in the project, and a few read-only checks.
 
+```mermaid
+flowchart TD
+  human["Person"]
+  master["Coordinating session"]
+  tasks["Task sessions"]
+  idFile["PROJECT_MASTER.json<br/>who coordinates, and the rules"]
+  stateFile["ORCHESTRATION.json<br/>progress, and items for the person"]
+  scripts["Read-only checks<br/>run on your machine"]
+
+  human -->|request| master
+  master -->|dispatch or resume| tasks
+  tasks -->|"callback, a claim"| master
+  master -->|read and write| idFile
+  master -->|read and write| stateFile
+  idFile -->|read only| scripts
+  stateFile -->|read only| scripts
+  scripts -->|print the result| human
+```
+
+The coordinating session reads and writes both files. `validate` and `owner-inbox` in `scripts/orchestration_state.py` run on your machine and only read them. A task session, called a child task in the rest of this document, writes `ORCHESTRATION.json` only when its handoff names that file and a revision.
+
 A project split across agent chats leaves the next session to reconstruct who owns each result, what was already accepted, and which decisions are still waiting on a person. PMOP stores that record in the project directory: `PROJECT_MASTER.json` for identity and policy, `ORCHESTRATION.json` for current outcomes and owner gates, and [SKILL.md](SKILL.md) for how the coordinating session takes a request, routes it, hands it off, checks it, and passes the role on.
 
 It is for someone who already works with an agent and wants one entry per project for incoming requests, routing, acceptance, and the decisions that need a person. Following it means reading the agreement and keeping the two files in the project.
@@ -43,28 +64,6 @@ On Windows, use `python` when `python3` is not on your PATH. The arguments stay 
 - The unittest command runs the suite in [tests/](tests/).
 - The inventory of `.` lists each `SKILL.md` under that path, with a relative path, size, and SHA-256. In this repository that is the root `SKILL.md`. The status string is `installed files only; runtime visibility unverified`.
 - The inventory of `./examples` is an empty list. That directory has no `SKILL.md`. The script searches only the directories you name. Omitting `--root` exits 2.
-
-## How the pieces fit
-
-```mermaid
-flowchart TD
-  owner[Owner]
-  master[Coordinating session]
-  files["PROJECT_MASTER.json<br/>ORCHESTRATION.json"]
-  child[Child task]
-  tools[Read-only Python scripts]
-
-  owner -->|sends a request| master
-  master -->|reads and writes| files
-  master -->|assigns one outcome| child
-  child -->|callback, still a claim| master
-  files -->|read only| tools
-  tools -->|check result and inbox| owner
-```
-
-The coordinating session is the logical master for that project. A later chat can take over the role; `project_id` stays. A child task owns one bounded outcome. The master accepts a callback after checking the evidence named in that callback. `validate`, `owner-inbox`, and `capability_index.py` only read. `demo.py` writes inside a temporary directory and deletes it.
-
-Codex, Hermes, and any other agent product sit outside the diagram. The adapter notes describe how a person maps sessions, IDs, and result retrieval onto a product. Launching the product happens in that product.
 
 ## Concepts
 

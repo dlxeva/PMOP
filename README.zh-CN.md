@@ -4,6 +4,27 @@
 
 PMOP 目前还是实验版本。一个多任务项目只保留一个主编排，用项目目录里的两份 JSON 记住做到哪了，再用只读脚本检查这两份文件。
 
+```mermaid
+flowchart TD
+  human["负责人"]
+  master["主编排"]
+  tasks["子任务会话"]
+  idFile["PROJECT_MASTER.json<br/>谁在主编排，以及规矩"]
+  stateFile["ORCHESTRATION.json<br/>进度，以及要人处理的事项"]
+  scripts["只读检查<br/>在你的电脑上运行"]
+
+  human -->|提出需求| master
+  master -->|分派或续做| tasks
+  tasks -->|"回执，待核对"| master
+  master -->|读取并写入| idFile
+  master -->|读取并写入| stateFile
+  idFile -->|只读| scripts
+  stateFile -->|只读| scripts
+  scripts -->|打印结果| human
+```
+
+主编排读写这两份文件。`scripts/orchestration_state.py` 里的 `validate` 和 `owner-inbox` 在你的电脑上运行，只读这两份文件。子任务会话只有在交接里写明 `ORCHESTRATION.json` 和修订号时，才会写这份文件。
+
 主编排就是这个项目接收需求、分派工作、验收结果的那个会话。项目一旦拆进多个代理对话，下一轮就很难分清结果归谁、哪些已经验收、哪些还卡在负责人身上；这些内容只留在聊天记录里，下次接不上。PMOP 把这份记录放回项目目录：`PROJECT_MASTER.json` 记身份和规矩，`ORCHESTRATION.json` 记当前结果和负责人关口，[SKILL.md](SKILL.md) 约定主编排如何接需求、分派、交接、验收，以及如何把主编排交给下一次对话。
 
 适合已经在用代理做项目、又希望每个项目只有一个入口来收需求、分派和验收，并把真正要人处理的事项单独列出来的人。使用方式是读这份约定，并把两份文件放在项目里。
@@ -43,28 +64,6 @@ Windows 上如果没有 `python3` 命令，把命令名换成 `python`，参数�
 - unittest 那条命令运行 [tests/](tests/) 里的测试。
 - 对 `.` 的盘点列出该路径下每份 `SKILL.md`，包含相对路径、字节数和 SHA-256。当前仓库里是根目录的 `SKILL.md`。状态字符串是 `installed files only; runtime visibility unverified`，意思是只统计磁盘上的文件，看不出宿主有没有加载它们。
 - 对 `./examples` 的盘点是空列表。该目录没有 `SKILL.md`。脚本只搜索你点名的目录。不传 `--root` 时退出码为 2。
-
-## 各部分怎么配合
-
-```mermaid
-flowchart TD
-  owner[负责人]
-  master[主编排]
-  files["PROJECT_MASTER.json<br/>ORCHESTRATION.json"]
-  child[子任务]
-  tools[只读 Python 脚本]
-
-  owner -->|提出需求| master
-  master -->|读取并更新| files
-  master -->|分派一个结果| child
-  child -->|回执，仍只是声称| master
-  files -->|只读| tools
-  tools -->|校验结果和收件箱| owner
-```
-
-每个项目一个主编排。会话可以换，`project_id` 不换。子任务只承担一个有边界的结果。回执先当作声称；主编排核对它指向的证据之后，才谈得上验收。`validate`、`owner-inbox` 和 `capability_index.py` 只读文件。`demo.py` 只在临时目录里写文件，结束时删除。
-
-Codex、Hermes 以及其他代理产品都在这张图外面。适配说明写的是人如何把会话、ID 和取回结果对到某个产品上。启动产品这件事，在那个产品自己的界面里做。
 
 ## 概念
 
