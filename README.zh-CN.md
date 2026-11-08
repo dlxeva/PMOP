@@ -4,24 +4,21 @@
 
 PMOP 目前还是实验版本。一个多任务项目只保留一个主编排，用项目目录里的两份 JSON 记住做到哪了，再用只读脚本检查这两份文件。
 
+<img alt="负责人向一个主编排提出需求。主编排分派或续做子任务会话，回执仍待核对。同一个主编排读写 PROJECT_MASTER.json（谁在主编排，以及规矩）和 ORCHESTRATION.json（进度，以及要人处理的事项）。只读检查在你的电脑上运行，读取这两份文件，并把结果打印出来。" src="docs/architecture.zh-CN.png" width="240">
+
+<details>
+<summary>图源码</summary>
+
 ```mermaid
 flowchart TD
-  human["负责人"]
-  master["主编排"]
-  tasks["子任务会话"]
-  idFile["PROJECT_MASTER.json<br/>谁在主编排，以及规矩"]
-  stateFile["ORCHESTRATION.json<br/>进度，以及要人处理的事项"]
-  scripts["只读检查<br/>在你的电脑上运行"]
-
-  human -->|提出需求| master
-  master -->|分派或续做| tasks
-  tasks -->|"回执，待核对"| master
-  master -->|读取并写入| idFile
-  master -->|读取并写入| stateFile
-  idFile -->|只读| scripts
-  stateFile -->|只读| scripts
-  scripts -->|打印结果| human
+  human["负责人"] -->|提出需求| master["主编排"]
+  master -->|分派或续做| tasks["子任务会话"]
+  tasks -->|"回执，待核对"| session["同一个主编排"]
+  session -->|读取并写入| files["PROJECT_MASTER.json<br/>谁在主编排，以及规矩<br/>ORCHESTRATION.json<br/>进度，以及要人处理的事项"]
+  files -->|只读| scripts["只读检查<br/>在你的电脑上运行<br/>把结果打印给负责人"]
 ```
+
+</details>
 
 主编排读写这两份文件。`scripts/orchestration_state.py` 里的 `validate` 和 `owner-inbox` 在你的电脑上运行，只读这两份文件。子任务会话只有在交接里写明 `ORCHESTRATION.json` 和修订号时，才会写这份文件。
 
