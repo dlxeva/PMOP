@@ -1,0 +1,34 @@
+{
+  "status": "Maintainer confirmed original authorship and authorized open-source publication on 2026-11-08; MIT, copyright dlxeva",
+  "source": "locally installed project-master-orchestration skill; not a git repository",
+  "source_files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "0324cc4ab9dcbddc6b4463f222d1dd47dca53a60d935b6b7926c1c38436f813a"
+    },
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "b06c7ea3921744d3356eb23cd63e997fede33c77ae156d7c0bf7061798bbb1c9"
+    },
+    {
+      "path": "references/child-task-handoff.md",
+      "sha256": "d8d4ff74084e6cb893174c02d23bd93b0b5c707e1144bb82f00f78b7c57aa973"
+    },
+    {
+      "path": "references/orchestration-contract.md",
+      "sha256": "0103ae8cac869f8ca2236f45ca9a2fee545e570f46887225175ce55c1d6b1016"
+    },
+    {
+      "path": "references/project-master-contract.md",
+      "sha256": "cbcb6469e12e488cfb03818db4f226b0f24489fc8e48aa06bcdad19ea5beee62"
+    },
+    {
+      "path": "scripts/capability_index.py",
+      "sha256": "7876821f057f5956a3e90fa754a6081a68e31314fa7cdb07a05fb09d6e805eaf"
+    },
+    {
+      "path": "scripts/orchestration_state.py",
+      "sha256": "04cd10b95f95e28310feccab3d0f0412de7a109f11f9439de3eb641b5dfbb838"
+    }
+  ]
+}

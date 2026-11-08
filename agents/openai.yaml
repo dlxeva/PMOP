@@ -1,0 +1,4 @@
+interface:
+  display_name: "PMOP"
+  short_description: "Route visible child tasks with project-local state"
+  default_prompt: "Use $pmop to route this project request, verify child outcomes, and surface only true owner gates."

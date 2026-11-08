@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "project_id": "stable-project-id",
+  "project_name": "Human-readable project name",
+  "governance_root": "/absolute/path/to/formal/project/root",
+  "code_roots": [
+    "/absolute/path/to/code/repository"
+  ],
+  "state_backend": {
+    "kind": "project-local",
+    "orchestration_file": "/absolute/path/to/ORCHESTRATION.json",
+    "legacy_sources": []
+  },
+  "master_thread": {
+    "current": {
+      "thread_id": "current-thread-id",
+      "host_id": "local",
+      "title": "Project Name｜项目主编排",
+      "status": "active",
+      "activated_at": "2026-01-01T00:00:00Z"
+    },
+    "history": []
+  },
+  "policy": {
+    "max_active_outcomes": 3,
+    "visible_child_threads": "manual",
+    "routing": "reuse_by_outcome_key",
+    "local_commit": "owner_confirmation",
+    "external_actions": "owner_confirmation",
+    "pre_action_notice": "准备｜风险｜停点",
+    "handoff_mode": "task_then_delta",
+    "child_lifecycle_default": "infer_from_outcome",
+    "callback_policy": "terminal_or_explicit_milestone",
+    "task_title_max_chars": 30,
+    "task_packet_soft_chars": 800,
+    "task_packet_hard_chars": 1400,
+    "delta_packet_hard_chars": 500,
+    "max_input_file_refs": 5
+  },
+  "execution_policy": "master routes and accepts; scoped child tasks execute",
+  "updated_at": "2026-01-01T00:00:00Z"
+}

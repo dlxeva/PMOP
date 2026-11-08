@@ -1,0 +1,93 @@
+{
+  "purpose": "Reviewed initial public candidate inventory; excludes this manifest and generated caches",
+  "files": [
+    {
+      "path": ".github/workflows/tests.yml",
+      "sha256": "5353beb530b413533e13a28a3a0f68618805c2bf75d6cc1685e5c85740668785"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "56941d379608b0c9092f843a9516e8e5d08c56d4540f59d84fbedd6f535946b2"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "590961cc17a6bdfbfd9cf7c375b7d6f67fdc04da5bf8024e306b4b3e64c11972"
+    },
+    {
+      "path": "README.md",
+      "sha256": "e09cd37be6ef22b647c0a1b456915de9696542527fa2680170fc33aa9e625c25"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "54ff401458989e07521e553caca4afbe74d4dfa97904e5d210bb0a440d6c3996"
+    },
+    {
+      "path": "adapters/README.md",
+      "sha256": "d1ccb2b23c3331f5d3b8df1fd07cc6436d16392f581ae4cf00b0d06a7d6c32f7"
+    },
+    {
+      "path": "adapters/codex.md",
+      "sha256": "a8c6a7ce618e25421f77b3cc7c01eed2740c6490b164fdfe37a65386bbc28934"
+    },
+    {
+      "path": "adapters/hermes.md",
+      "sha256": "42bbd58be84e7d67645118548882c59df37a7a47aac5607f3b415fec482b7399"
+    },
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "ac9bc8650775ab048405ef5b7f36b50bdbd6a2047c05420290ac46f0aaf29c50"
+    },
+    {
+      "path": "docs/RELEASE_REVIEW.md",
+      "sha256": "dd6aa717d8102130ff74e877e1f83bc9cc9d08f5adaf36127a6d68de05d40ad9"
+    },
+    {
+      "path": "docs/SOURCE_REVIEW.json",
+      "sha256": "97b396e0d8d85ced20a7ce2bb46b4553db910a7c03ac16e0da0b78e8f2e58b61"
+    },
+    {
+      "path": "docs/VERIFICATION.md",
+      "sha256": "0c4c48368c55846a05e0cd028caab400e55d262078acdc43614a1b5ee1eba96a"
+    },
+    {
+      "path": "examples/README.md",
+      "sha256": "922a516b95d49f7bf283884dbff4f13136a4038b415f73ee77dfa3128f2c03f7"
+    },
+    {
+      "path": "references/child-task-handoff.md",
+      "sha256": "d8d4ff74084e6cb893174c02d23bd93b0b5c707e1144bb82f00f78b7c57aa973"
+    },
+    {
+      "path": "references/orchestration-contract.md",
+      "sha256": "0103ae8cac869f8ca2236f45ca9a2fee545e570f46887225175ce55c1d6b1016"
+    },
+    {
+      "path": "references/project-master-contract.md",
+      "sha256": "60c4ead9d1b46bf7f41af20d18acebb57c5162ac9440599da53cd2fdf8dee9a0"
+    },
+    {
+      "path": "scripts/capability_index.py",
+      "sha256": "ae3879d9bcba3be3bf291032ffffa6bf41b1274642d715ef823eb7255e6712c7"
+    },
+    {
+      "path": "scripts/demo.py",
+      "sha256": "8e702b1e03fd8c11c7513f79ccda71ef52b40e7779c7030763bbc45c84eb16dd"
+    },
+    {
+      "path": "scripts/orchestration_state.py",
+      "sha256": "50e1e2287a2af2553285d437972973e9368006b7fa4e18a96bb9565f3d4f5696"
+    },
+    {
+      "path": "templates/ORCHESTRATION.json",
+      "sha256": "909d44b28336ffeed3440fd8034ebc65c91b87d7d3b5848feb8df7ba1a75776a"
+    },
+    {
+      "path": "templates/PROJECT_MASTER.json",
+      "sha256": "bc8f74a1ea1298c4f35c71d8a92aa1da3a468c8ad7e2d6e74b92fdf86c839cca"
+    },
+    {
+      "path": "tests/test_orchestration.py",
+      "sha256": "db1770b9615964d62a3fb6d93264038727262ef5c697f9667e586f4a9f001a6f"
+    }
+  ]
+}

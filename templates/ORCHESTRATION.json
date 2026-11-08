@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "project_id": "stable-project-id",
+  "revision": 1,
+  "updated_at": "2026-01-01T00:00:00Z",
+  "governance": {
+    "status": "healthy",
+    "reason": null,
+    "local_safe_work": "allowed",
+    "external_high_risk_work": "requires_fresh_verification"
+  },
+  "active_outcomes": [],
+  "owner_gates": [],
+  "legacy_sources": []
+}

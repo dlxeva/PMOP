@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env*
+.DS_Store
+.local/
+
+# Never publish real project control state or host receipts.
+/PROJECT_MASTER.json
+/ORCHESTRATION.json
+/private-evidence/
