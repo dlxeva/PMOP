@@ -4,24 +4,21 @@ English | [简体中文](README.zh-CN.md)
 
 PMOP is an experimental operating agreement for a multi-task project: one coordinating session, two JSON files in the project, and a few read-only checks.
 
+<img alt="A person sends a request to one coordinating session. That session dispatches or resumes task sessions, and they return a callback that is still a claim. The same session reads and writes PROJECT_MASTER.json, which records who coordinates and the rules, and ORCHESTRATION.json, which records progress and the items that need a person. Read-only checks on your machine read those files and print the result." src="docs/architecture.en.png" width="268">
+
+<details>
+<summary>Diagram source</summary>
+
 ```mermaid
 flowchart TD
-  human["Person"]
-  master["Coordinating session"]
-  tasks["Task sessions"]
-  idFile["PROJECT_MASTER.json<br/>who coordinates, and the rules"]
-  stateFile["ORCHESTRATION.json<br/>progress, and items for the person"]
-  scripts["Read-only checks<br/>run on your machine"]
-
-  human -->|request| master
-  master -->|dispatch or resume| tasks
-  tasks -->|"callback, a claim"| master
-  master -->|read and write| idFile
-  master -->|read and write| stateFile
-  idFile -->|read only| scripts
-  stateFile -->|read only| scripts
-  scripts -->|print the result| human
+  human["Person"] -->|request| master["Coordinating session"]
+  master -->|dispatch or resume| tasks["Task sessions"]
+  tasks -->|"callback, a claim"| session["Same coordinating session"]
+  session -->|read and write| files["PROJECT_MASTER.json<br/>who coordinates, and the rules<br/>ORCHESTRATION.json<br/>progress, and items for the person"]
+  files -->|read only| scripts["Read-only checks<br/>on your machine<br/>print the result to the person"]
 ```
+
+</details>
 
 The coordinating session reads and writes both files. `validate` and `owner-inbox` in `scripts/orchestration_state.py` run on your machine and only read them. A task session, called a child task in the rest of this document, writes `ORCHESTRATION.json` only when its handoff names that file and a revision.
 
