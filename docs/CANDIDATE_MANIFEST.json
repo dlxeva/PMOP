@@ -1,5 +1,5 @@
 {
-  "purpose": "Reviewed initial public candidate inventory; excludes this manifest and generated caches",
+  "purpose": "Current reviewed public candidate inventory; excludes this manifest and generated caches",
   "files": [
     {
       "path": ".github/workflows/tests.yml",
@@ -47,7 +47,7 @@
     },
     {
       "path": "docs/VERIFICATION.md",
-      "sha256": "0c4c48368c55846a05e0cd028caab400e55d262078acdc43614a1b5ee1eba96a"
+      "sha256": "e8685ff46adb4b98d20691658fa089bf93f605cc1205b81a7f47a902e14198d4"
     },
     {
       "path": "examples/README.md",
@@ -67,15 +67,15 @@
     },
     {
       "path": "scripts/capability_index.py",
-      "sha256": "ae3879d9bcba3be3bf291032ffffa6bf41b1274642d715ef823eb7255e6712c7"
+      "sha256": "9ddca6864089eb57c6bba8662e8d972dd190be2b11005a6f154bbfb2464cbec2"
     },
     {
       "path": "scripts/demo.py",
-      "sha256": "8e702b1e03fd8c11c7513f79ccda71ef52b40e7779c7030763bbc45c84eb16dd"
+      "sha256": "0ecfc42056a44af86d6ddf523b4b4af089bff6279f7bee0bc79d9dce750e3818"
     },
     {
       "path": "scripts/orchestration_state.py",
-      "sha256": "50e1e2287a2af2553285d437972973e9368006b7fa4e18a96bb9565f3d4f5696"
+      "sha256": "1e15334f74dd4ddd87a60d6424b6f4b1e47ec351cba64e743f02d4295908f5a0"
     },
     {
       "path": "templates/ORCHESTRATION.json",
@@ -87,7 +87,7 @@
     },
     {
       "path": "tests/test_orchestration.py",
-      "sha256": "db1770b9615964d62a3fb6d93264038727262ef5c697f9667e586f4a9f001a6f"
+      "sha256": "22b919c9a525525c2f97cd3c2f1074349e0e222b9bd5eb195028194b28cc29c2"
     }
   ]
 }

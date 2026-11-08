@@ -1,5 +1,6 @@
 import copy
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -125,6 +126,13 @@ class StateTests(unittest.TestCase):
         self.assertEqual(result.returncode, 1)
         self.assertFalse(json.loads(result.stdout)['valid'])
         self.assertNotIn('Traceback', result.stderr)
+
+    def test_demo_uses_utf8_with_legacy_output_encoding(self):
+        result = subprocess.run(
+            [sys.executable, str(BASE / 'scripts/demo.py')],
+            env=dict(os.environ, PYTHONIOENCODING='ascii'), capture_output=True)
+        self.assertEqual(result.returncode, 0, result.stderr.decode('utf-8'))
+        self.assertIn('需要我拍板', result.stdout.decode('utf-8'))
 
     def test_cli_requires_inventory_scope(self):
         result = subprocess.run([sys.executable, str(BASE/'scripts/capability_index.py')], capture_output=True)

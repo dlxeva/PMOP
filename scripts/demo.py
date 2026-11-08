@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Create a synthetic sandbox, validate it and print its read-only owner inbox."""
 import json
+import sys
 import tempfile
 from pathlib import Path
 from orchestration_state import validate_root, collect_owner_gates, render_markdown
@@ -9,7 +10,7 @@ from orchestration_state import validate_root, collect_owner_gates, render_markd
 def create_example(root: Path) -> None:
     templates = Path(__file__).resolve().parent.parent / 'templates'
     for name in ['PROJECT_MASTER.json', 'ORCHESTRATION.json']:
-        data = json.loads((templates / name).read_text())
+        data = json.loads((templates / name).read_text(encoding='utf-8'))
         if name == 'PROJECT_MASTER.json':
             data['governance_root'] = str(root)
             data['code_roots'] = [str(root)]
@@ -24,10 +25,14 @@ def create_example(root: Path) -> None:
                 'risk': 'Publishing without rights may disclose protected material',
                 'estimated_minutes': 10, 'resume_action': 'Review the release candidate',
                 'related_outcome_key': None}]
-        (root / name).write_text(json.dumps(data, indent=2) + '\n')
+        (root / name).write_text(json.dumps(data, indent=2) + '\n', encoding='utf-8')
 
 
 if __name__ == '__main__':
+    # CLI output is UTF-8 even on legacy Windows locales or redirected pipes.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     with tempfile.TemporaryDirectory(prefix='orchestration-demo-') as name:
         root = Path(name)
         create_example(root)

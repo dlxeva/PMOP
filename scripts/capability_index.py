@@ -2,6 +2,7 @@
 """Inventory explicitly selected skill roots without config, network or runtime probes."""
 from __future__ import annotations
 import argparse
+import sys
 import hashlib
 import json
 from pathlib import Path
@@ -53,4 +54,8 @@ def main() -> int:
 
 
 if __name__ == '__main__':
+    # CLI output is UTF-8 even on legacy Windows locales or redirected pipes.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     raise SystemExit(main())

@@ -24,3 +24,7 @@
 - Hermes 本机源码 aaa863f7ff 的 delegate_task schema 与后台生命周期说明已读；CLI 资产请求被策略阻止，未绕过。
 - 新增 CI 配置只是待运行配置，不算跨系统验证证据。
 - 发布前 GitHub 账户连接已验证。维护者随后确认原创并授权以 PMOP 名称公开，采用 MIT 许可证。
+
+## 首轮远程 CI 修正
+
+首轮 Linux/macOS 通过，Windows 暴露 Demo 使用系统默认编码读取中文模板的问题。改为显式 UTF-8 文件读写，三个 CLI 的输出也统一 UTF-8，并增加强制 ASCII 环境下的 Demo 回归测试。修复后的完整矩阵结果以 Actions 对应提交为准。
